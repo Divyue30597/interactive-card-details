@@ -4,7 +4,7 @@ import cardFrontImage from "./assets/bg-card-front.png";
 import cardBackImage from "./assets/bg-card-back.png";
 import cardLogoImage from "./assets/card-logo.svg";
 import { ImageComp } from "./Component/ImageComp/ImageComp";
-import { Form } from "./Component/Form/Form";
+import { FormComp } from "./Component/Form/Form";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <ImageComp imageName={cardBackImage} altText={"back of the card"} />
         </div>
         <div className="full-form">
-          <Form />
+          <FormComp />
         </div>
       </section>
     </div>
