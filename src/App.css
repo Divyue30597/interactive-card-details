@@ -18,11 +18,12 @@
   height: 100vh;
   background-repeat: no-repeat;
   object-fit: cover;
+  background-size: 100%;
 }
 
 .credit-card-payment .card-image-front {
   position: absolute;
-  top: 12%;
+  top: 20%;
   left: 10%;
   z-index: 1;
 }
@@ -33,7 +34,7 @@
 
 .credit-card-payment .card-image-front figure:nth-child(2) {
   position: absolute;
-  top: 15%;
+  top: 20%;
   left: 10%;
 }
 

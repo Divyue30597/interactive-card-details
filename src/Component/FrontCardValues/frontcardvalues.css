@@ -1,0 +1,18 @@
+.front-card-values {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  color: #ffffff;
+}
+
+.form-cardNumber {
+  margin: 36px;
+  font-size: 2rem;
+}
+
+.holderName-mm-yy {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 0 36px;
+}
