@@ -1,0 +1,24 @@
+.form-submit-success {
+  text-align: center;
+}
+
+.form-submit-success figure,
+.form-submit-success p,
+.form-submit-success h2 {
+  margin-bottom: 24px;
+}
+
+.form-submit-success p {
+  font-size: 24px;
+}
+
+.form-submit-success h2 {
+  font-size: 48px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 500;
+}
+
+.form-submit-success button {
+  font-size: 18px;
+}
