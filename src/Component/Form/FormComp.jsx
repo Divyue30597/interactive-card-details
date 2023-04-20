@@ -23,17 +23,20 @@ const validCardSchema = Yup.object().shape({
 });
 
 function cc_format(value) {
-  const v = value
-    .replace(/\s+/g, "")
-    .replace(/[^0-9]/gi, "")
-    .substr(0, 16);
-  const parts = [];
+  if (value !== null && value !== undefined) {
+    const v = value
+      .toString()
+      ?.replace(/\s+/g, "")
+      ?.replace(/[^0-9]/gi, "")
+      ?.substr(0, 16);
+    const parts = [];
 
-  for (let i = 0; i < v.length; i += 4) {
-    parts.push(v.substr(i, 4));
+    for (let i = 0; i < v.length; i += 4) {
+      parts.push(v.substr(i, 4));
+    }
+    console.log(parts);
+    return parts.length > 1 ? parts.join(" ") : value;
   }
-
-  return parts.length > 1 ? parts.join(" ") : value;
 }
 
 function FormInput({ label, fieldName, placeholder }) {
@@ -53,7 +56,7 @@ export function FormComp({ setFormSubmit, setFormValues }) {
     <Formik
       initialValues={{
         holderName: "",
-        cardNumber: undefined,
+        cardNumber: "",
         expMonth: undefined,
         expYear: undefined,
         cardCvc: undefined,
@@ -65,7 +68,7 @@ export function FormComp({ setFormSubmit, setFormValues }) {
         console.log(values);
       }}
     >
-      {({ errors, touched }) => (
+      {(props) => (
         <Form>
           <div className="holder-data">
             <FormInput
@@ -79,11 +82,23 @@ export function FormComp({ setFormSubmit, setFormValues }) {
                 form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
                 meta,
               }) => (
-                <div>
-                  {`${console.log(field)}`}
-                  <input type="text" placeholder="Email" {...field} />
+                <div style={{ marginBottom: "12px" }}>
+                  <label htmlFor="cardNumber">Card Number</label>
+                  <input
+                    name="cardNumber"
+                    type="text"
+                    placeholder="0000 0000 0000 0000"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={cc_format(props.values.cardNumber)}
+                  />
                   {meta.touched && meta.error && (
-                    <div className="error">{meta.error}</div>
+                    <div
+                      style={{ color: "red", fontSize: "12px" }}
+                      className="error"
+                    >
+                      {meta.error}
+                    </div>
                   )}
                 </div>
               )}
