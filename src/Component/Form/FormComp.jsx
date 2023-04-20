@@ -78,7 +78,7 @@ export function FormComp({ setFormSubmit, setFormValues }) {
             />
             <Field name="cardNumber">
               {({
-                field, // { name, value, onChange, onBlur }
+                // { name, value, onChange, onBlur }
                 form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
                 meta,
               }) => (
@@ -91,6 +91,7 @@ export function FormComp({ setFormSubmit, setFormValues }) {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     value={cc_format(props.values.cardNumber)}
+                    max="16"
                   />
                   {meta.touched && meta.error && (
                     <div

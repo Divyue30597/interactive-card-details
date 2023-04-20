@@ -48,3 +48,15 @@
   width: 30%;
   margin: auto;
 }
+
+.card-image-back figure {
+  position: relative;
+}
+
+.card-image-back p {
+  position: absolute;
+  bottom: 48%;
+  right: 10%;
+  margin-right: 12px;
+  color: #fff;
+}

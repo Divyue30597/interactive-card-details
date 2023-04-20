@@ -9,7 +9,6 @@ import { FormSubmitSuccess } from "./Component/FormSubmitSuccess/FormSubmitSucce
 import { ImageComp } from "./Component/ImageComp/ImageComp";
 import { FormComp } from "./Component/Form/FormComp";
 import { FrontCardValues } from "./Component/FrontCardValues/FrontCardValues";
-import { BackCardValues } from "./Component/BackCardValues/BackCardValues";
 
 function App() {
   const [formSubmit, setFormSubmit] = useState(false);
@@ -32,7 +31,7 @@ function App() {
         </div>
         <div className="card-image-back">
           <ImageComp imageName={cardBackImage} altText={"back of the card"} />
-          <BackCardValues cardCVC={formValues.cardCvc} />
+          <p className="exp-CVC">{formValues.cardCvc}</p>
         </div>
         <div className="full-form">
           {formSubmit ? (
