@@ -57,15 +57,19 @@ Users should be able to:
 - Understood the `position` property in CSS
 - Used typescript
 - Used the formik forms and learnt how to customize them to my need
--
 
 ### Useful resources
 
 - [For credit card input](https://codepen.io/al3ka/pen/PoOejJY)
 
+### Github URL
+
+- Github - [interactive-card-detail](https://github.com/Divyue30597/interactive-card-details.git)
+
 ## Author
 
 - Frontend Mentor - [@Divyue30597](https://www.frontendmentor.io/profile/Divyue30597)
+- Github - [Divyue30597](https://github.com/Divyue30597)
 
 ## Todo
 
