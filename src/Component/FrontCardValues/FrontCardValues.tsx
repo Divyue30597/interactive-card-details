@@ -1,6 +1,7 @@
 import "./frontcardvalues.css";
+import { TformValues } from "../../App";
 
-export function FrontCardValues({ formValues }) {
+export function FrontCardValues({ formValues }: { formValues: TformValues }) {
   return (
     <div className="front-card-values">
       <p className="form-cardNumber">{formValues.cardNumber}</p>

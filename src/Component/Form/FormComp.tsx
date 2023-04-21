@@ -1,6 +1,7 @@
-import { Field, Formik, Form, ErrorMessage } from "formik";
+import { Field, Formik, Form, FormikProps } from "formik";
 import "./form.css";
 import * as Yup from "yup";
+import { TformValues } from "../../App";
 
 const validCardSchema = Yup.object().shape({
   holderName: Yup.string()
@@ -22,7 +23,7 @@ const validCardSchema = Yup.object().shape({
     .required("Can't be blank"),
 });
 
-function cc_format(value) {
+function cc_format(value: number) {
   if (value !== null && value !== undefined) {
     const v = value
       .toString()
@@ -39,10 +40,20 @@ function cc_format(value) {
   }
 }
 
-function FormInputV2({ id, labelName, placeholder, fieldProperty }) {
+function FormInputV2({
+  id,
+  labelName,
+  placeholder,
+  fieldProperty,
+}: {
+  id: string;
+  labelName: string;
+  placeholder: string;
+  fieldProperty: FormikProps<any>;
+}) {
   return (
     <Field name={id}>
-      {({ meta }) => (
+      {({ meta }: { meta: any }) => (
         <div style={{ marginBottom: "12px" }}>
           <label htmlFor={id}>{labelName}</label>
           {id === "cardNumber" ? (
@@ -99,7 +110,13 @@ function FormInputV2({ id, labelName, placeholder, fieldProperty }) {
 //   );
 // }
 
-export function FormComp({ setFormSubmit, setFormValues }) {
+export function FormComp({
+  setFormSubmit,
+  setFormValues,
+}: {
+  setFormSubmit: React.Dispatch<React.SetStateAction<boolean>>;
+  setFormValues: React.Dispatch<React.SetStateAction<TformValues>>;
+}) {
   return (
     <Formik
       initialValues={{

@@ -8,9 +8,17 @@ import { ImageComp } from "./Component/ImageComp/ImageComp";
 import { FormComp } from "./Component/Form/FormComp";
 import { FrontCardValues } from "./Component/FrontCardValues/FrontCardValues";
 
+export type TformValues = {
+  holderName: string;
+  cardNumber: string;
+  expMonth: undefined | string;
+  expYear: undefined | string;
+  cardCvc: undefined | string;
+};
+
 function App() {
   const [formSubmit, setFormSubmit] = useState(false);
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<TformValues>({
     holderName: "JANE APPLESEED",
     cardNumber: "0000 0000 0000 0000",
     expMonth: "00",
