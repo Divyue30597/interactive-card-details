@@ -26,6 +26,7 @@ input {
   margin-bottom: 8px;
   border-radius: 8px;
   border: 2px hsl(278, 68%, 11%) solid;
+  font-size: 18px;
 }
 
 input:nth-child(1),

@@ -34,22 +34,70 @@ function cc_format(value) {
     for (let i = 0; i < v.length; i += 4) {
       parts.push(v.substr(i, 4));
     }
-    console.log(parts);
+
     return parts.length > 1 ? parts.join(" ") : value;
   }
 }
 
-function FormInput({ label, fieldName, placeholder }) {
+function FormInputV2({ id, labelName, placeholder, fieldProperty }) {
   return (
-    <div className="form-input">
-      <label htmlFor={fieldName}>{label}</label>
-      <Field id={fieldName} name={fieldName} placeholder={placeholder} />
-      <p style={{ color: "red", fontSize: "12px" }}>
-        <ErrorMessage name={fieldName} />
-      </p>
-    </div>
+    <Field name={id}>
+      {({ meta }) => (
+        <div style={{ marginBottom: "12px" }}>
+          <label htmlFor={id}>{labelName}</label>
+          {id === "cardNumber" ? (
+            <input
+              id={id}
+              name={id}
+              type="text"
+              placeholder={placeholder}
+              onChange={fieldProperty.handleChange}
+              onBlur={fieldProperty.handleBlur}
+              value={cc_format(fieldProperty.values.cardNumber)}
+              style={
+                meta.touched && meta.error ? { border: "2px solid red" } : {}
+              }
+            />
+          ) : (
+            <input
+              id={id}
+              name={id}
+              type="text"
+              placeholder={placeholder}
+              onChange={fieldProperty.handleChange}
+              onBlur={fieldProperty.handleBlur}
+              style={
+                meta.touched && meta.error ? { border: "2px solid red" } : {}
+              }
+            />
+          )}
+          {meta.touched && meta.error && (
+            <p style={{ color: "red", fontSize: "12px" }} className="error">
+              {meta.error}
+            </p>
+          )}
+        </div>
+      )}
+    </Field>
   );
 }
+
+// function FormInput({ label, fieldName, placeholder }) {
+//   return (
+//     <div className="form-input">
+//       <label htmlFor={fieldName}>{label}</label>
+//       <Field
+//         id={fieldName}
+//         name={fieldName}
+//         placeholder={placeholder}
+//         style={meta.touched && meta.error ? { border: "2px solid red" } : {}}
+//       />
+//       <p style={{ color: "red", fontSize: "12px" }}>
+//         <ErrorMessage name={fieldName} />
+//       </p>
+//     </div>
+//   );
+// }
 
 export function FormComp({ setFormSubmit, setFormValues }) {
   return (
@@ -65,64 +113,45 @@ export function FormComp({ setFormSubmit, setFormValues }) {
       onSubmit={(values) => {
         setFormSubmit(true);
         setFormValues({ ...values });
-        console.log(values);
       }}
     >
       {(props) => (
         <Form>
           <div className="holder-data">
-            <FormInput
-              label={"Card holder data"}
-              fieldName={"holderName"}
+            <FormInputV2
+              id={"holderName"}
+              labelName={"Card Holder"}
               placeholder={"e.g. Jane Appleseed"}
+              fieldProperty={props}
             />
-            <Field name="cardNumber">
-              {({
-                // { name, value, onChange, onBlur }
-                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                meta,
-              }) => (
-                <div style={{ marginBottom: "12px" }}>
-                  <label htmlFor="cardNumber">Card Number</label>
-                  <input
-                    name="cardNumber"
-                    type="text"
-                    placeholder="0000 0000 0000 0000"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={cc_format(props.values.cardNumber)}
-                    max="16"
-                  />
-                  {meta.touched && meta.error && (
-                    <div
-                      style={{ color: "red", fontSize: "12px" }}
-                      className="error"
-                    >
-                      {meta.error}
-                    </div>
-                  )}
-                </div>
-              )}
-            </Field>
+            <FormInputV2
+              id={"cardNumber"}
+              labelName={"Card Number"}
+              placeholder={"e.g. 0000 0000 0000 0000"}
+              fieldProperty={props}
+            />
           </div>
           <div className="expiry-date-and-cvc">
             <div className="expiry-date">
-              <FormInput
-                fieldName={"expMonth"}
-                label={"Exp. date"}
+              <FormInputV2
+                id={"expMonth"}
+                labelName={"Exp. date"}
                 placeholder={"MM"}
+                fieldProperty={props}
               />
-              <FormInput
-                fieldName={"expYear"}
-                label={"(MM/YY)"}
+              <FormInputV2
+                id={"expYear"}
+                labelName={"(MM/YY)"}
                 placeholder={"YY"}
+                fieldProperty={props}
               />
             </div>
             <div className="cvc">
-              <FormInput
-                fieldName={"cardCvc"}
-                label={"CVC"}
+              <FormInputV2
+                id={"cardCvc"}
+                labelName={"CVC"}
                 placeholder={"CVC"}
+                fieldProperty={props}
               />
             </div>
           </div>
@@ -130,30 +159,5 @@ export function FormComp({ setFormSubmit, setFormValues }) {
         </Form>
       )}
     </Formik>
-
-    // <form>
-    //   <div className="holder-data">
-    //     <FormInput
-    //       id={"card-holder-name"}
-    //       label={"Card Holder Name"}
-    //       placeholder={"e.g. Jane Appleseed"}
-    //     />
-    //     <FormInput
-    //       id={"card-number"}
-    //       label={"Card Number"}
-    //       placeholder={"e.g. 1234 5678 9101"}
-    //     />
-    //   </div>
-
-    //   <div className="expiry-date-and-cvc">
-    //     <div className="expiry-date">
-    //       <FormInput id={"mm"} label={"Exp. date"} placeholder={"MM"} />
-    //       <FormInput id={"yy"} label={"(MM/YY)"} placeholder={"YY"} />
-    //     </div>
-    //     <div className="cvc">
-    //       <FormInput id={"cvc"} label={"CVC"} placeholder={"CVC"} />
-    //     </div>
-    //   </div>
-    // </form>
   );
 }

@@ -1,10 +1,8 @@
 import "./App.css";
-
 import cardFrontImage from "./assets/bg-card-front.png";
 import cardBackImage from "./assets/bg-card-back.png";
 import cardLogoImage from "./assets/card-logo.svg";
 import { useState } from "react";
-
 import { FormSubmitSuccess } from "./Component/FormSubmitSuccess/FormSubmitSuccess";
 import { ImageComp } from "./Component/ImageComp/ImageComp";
 import { FormComp } from "./Component/Form/FormComp";
